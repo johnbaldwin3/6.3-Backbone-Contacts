@@ -19,7 +19,7 @@ var ContactHeaderView = Backbone.View.extend ({
   className: 'app-header',
   render : function(){
     this.$el.text("Contact Tree");
-    
+
     return this;
   }
 });
@@ -82,7 +82,7 @@ var ContactPersonView = Backbone.View.extend({
     this.$el.append(this.template(context));
     return this;
   },
-  delete: function(event){
+  deleteThem: function(event){
    event.preventDefault();
    this.model.destroy();
  }
