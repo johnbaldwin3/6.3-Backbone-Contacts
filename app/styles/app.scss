@@ -5,7 +5,13 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 // Import Bootstrap
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
+//Variables
 
+$input-color: rgba(52, 72, 44, 0.81);
+$lato: 'Lato', sans-serif;
+$text-shadow: 1px 1px 2px black ;
+$bark-color: #3b4645;
+$box-shadow: 1px 0px 5px 0px black;
 *,
 *::before,
 *::after {
@@ -14,4 +20,92 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 
 img {
   max-width: 100%;
+}
+
+header {
+  background-color: rgb(139, 165, 128);
+  box-shadow: 0px 2px 14px 0px black;
+}
+#app-header {
+  font-family: 'Syncopate', sans-serif;
+  word-spacing: 20px;
+  font-size: 60px;
+  font-weight: 600;
+  text-shadow: 0px 4px 8px black;
+  letter-spacing: 7px;
+}
+
+.wrapper {
+  color: white;
+  background: url('../images/pexels-photo-72509.jpeg');
+  background-size: cover;
+}
+
+.form-control {
+  background-color: $input-color;
+  color: white;
+  font-size: 14px;
+
+  //  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  // color: pink;}
+
+
+}
+
+.contact-person {
+  background-color: $input-color;
+  font-size: 16px;
+}
+
+.labeller {
+  font-family: $lato;
+  font-size: 17px;
+  letter-spacing: 1px;
+  word-spacing: 4px;
+  margin-top: 5px;
+}
+
+.contact-head {
+  font-size: 30px;
+  text-shadow: $text-shadow;
+}
+
+#sub-button {
+  background-color: #3b4645;
+  box-shadow: $box-shadow;
+}
+
+#contact-former {
+  background-color: rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 9px 20px black;
+  padding: 10px;
+}
+
+.contact-person {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+    .contact-person:nth-child(1n) {
+      border-top-radius: 10px;
+    }
+}
+
+.indiv-contact {
+  margin: 10px auto;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 9px 20px black;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.headstrong {
+  text-align: center;
+}
+
+.delete-contact {
+  @extend #sub-button;
+  margin-bottom: 5px;
+  float: right;
+  margin-right: 12px;
 }

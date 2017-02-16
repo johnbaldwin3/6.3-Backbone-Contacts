@@ -13,10 +13,21 @@ $.fn.serializeObject = function() {
  };
 
 
+var ContactHeaderView = Backbone.View.extend ({
+  tagName: 'h1',
+  id: "app-header",
+  className: 'app-header',
+  render : function(){
+    this.$el.text("Contact Tree");
+    return this;
+  }
+});
+
+
 var ContactFormView = Backbone.View.extend({
   tagName: 'form',
   id: "contact-former",
-  //className: "contact-person"
+  className: "col-md-12",
    events: {
       'submit': 'addContactForm'
     },
@@ -28,26 +39,27 @@ var ContactFormView = Backbone.View.extend({
   },
   addContactForm: function(event) {
     event.preventDefault();
-    var contactInfo = $(event.currentTarget).serializeObject() ;
-    console.log('hello');
-    console.log(contactInfo);
-    this.collection.add(contactInfo);
-    this.model.set(contactInfo);
-    this.model.save();
+    var contactInfo = this.$el.serializeObject() ;
+    //this.collection.add(contactInfo);
+    //this.model.set(contactInfo);
+    this.collection.create(contactInfo);
+    //console.log('this.collection', this.collection);
+    this.$el.val('');
   }
 });
 
 var ContactListView = Backbone.View.extend({
   tagName: 'ul',
-  className: 'list-group',
+  className: 'list-group col-md-12',
   initialize: function() {
-
+    this.listenTo(this.collection, 'add', this.renderNewContact);
   },
   render: function() {
     return this;
   },
   renderNewContact: function(newContactee) {
-    var contactPerson = new ConactPersonView({model: newContactee});
+    var contactPerson = new ContactPersonView({model: newContactee});
+    //console.log('conPerson', contactPerson);
     this.$el.append(contactPerson.render().el);
   }
 
@@ -57,11 +69,22 @@ var ContactPersonView = Backbone.View.extend({
   tagName: 'li',
   className:'list-group-item contact-person',
   template: newContactTemplate,
+  events: {
+    'click .delete-contact': 'deleteThem'
+  },
+  initialize: function(){
+    this.listenTo(this.model, 'destroy', this.remove);
+  },
   render: function() {
     var context = this.model.toJSON();
-    this.$el.html(this.template(context));
+    //console.log("thismod",context);
+    this.$el.append(this.template(context));
     return this;
-  }
+  },
+  deleteThem: function(event){
+   event.preventDefault();
+   this.model.destroy();
+ }
 });
 
 
@@ -70,6 +93,7 @@ var ContactPersonView = Backbone.View.extend({
 module.exports = {
   ContactFormView: ContactFormView,
   ContactListView: ContactListView,
-  ContactPersonView: ContactPersonView
+  ContactPersonView: ContactPersonView,
+  ContactHeaderView: ContactHeaderView
 
 }
